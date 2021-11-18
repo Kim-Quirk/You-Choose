@@ -1,20 +1,18 @@
-# **YOU-CHOOSE: Restaurant Chooser API**
+# YOU-CHOOSE: Restaurant Chooser API
 
 ---
 
-# GETTING STARTED
+## FOR THE FRONTEND: GET STARTED
 
-## A note on POST requests:
+### A note on POST requests:
 
 Each request should include a body and headers.For requests that require the user to be logged in, include a JWT authorization token in the headers. You can obtain the authorization token by passing in the username and password to the /login endpoint. Store this somewhere on the browser so it can be accessed later. Pay attention to the expiration date.
 
 ---
 
-## **FOR STUFF THAT HANDLES SESSIONS:**
-
+### FOR STUFF THAT HANDLES SESSIONS:
 
 ### CREATE A NEW SESSION:
-
 
 Example Rquest:
 
@@ -34,11 +32,7 @@ Example Response:
 
 ```
 
-
 ### CHECK IF A ROOM EXISTS
-
-Example Request:
-
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/roomExists?roomId={num}')
 ```
@@ -49,23 +43,25 @@ Example Response:
 
 ```
 
-### **GET A LIST OF NEARBY RESTAURANTS**
+### GET A LIST OF NEARBY RESTAURANTS
 
 Example Request:
 
 ```javascript
-fetch("https://you-choose-api.herokuapp.com/getRestaurantData?lat={latitude}?long={longitude}?radius={radius}?priceRange={priceRange}");
+fetch(
+  "https://you-choose-api.herokuapp.com/getRestaurantData?lat={latitude}?long={longitude}?radius={radius}?priceRange={priceRange}"
+);
 ```
 
-**Note the query parameters.** Latitude and longitude are required, the default search radius is 5 miles. If you don't specify a price range, all will be included
+Note the query parameters. Latitude and longitude are required, the default search radius is 5 miles. If you don't specify a price range, all will be included
 
-* latitude: number
+latitude: number
 
-* longitude: number
+longitude: number
 
-* radius: number of miles
+radius: number of miles
 
-* priceRange: 1, 2, or 3, with 3 being the most expensive.
+priceRange: 1, 2, or 3, with 3 being the most expensive.
 
 We will return a list of 30 restaurants
 
@@ -74,37 +70,37 @@ Example response:
 ```javascript
 {
 message: "Retrevial successful",
-    data:[
-        0:{
-            "restaurant_name":"Bareburger - Cobble Hill"
-            "restaurant_phone":"(347) 529-6673"
-            "restaurant_website":""
-            "hours":"Sun-Wed: 11am-10pm Thu-Sat: 11am-11pm"
-            "price_range":"$$"
-            "price_range_num":2
-            "restaurant_id":4068919073992378
-            "cuisines":[...]4 items
-            "address":{...}5 items
-            "geo":{...}2 items
-            "menus":[]0 items
-            "last_updated":"2021-01-05T07:35:38.231Z"
-        }
-        1:{...}
-        2:{...}
-        3:{...}
-        4:{...}
-        5:{...}
-        6:{...}
-        7:{...}
-    ]
+data:[
+0:{
+"restaurant_name":"Bareburger - Cobble Hill"
+"restaurant_phone":"(347) 529-6673"
+"restaurant_website":""
+"hours":"Sun-Wed: 11am-10pm Thu-Sat: 11am-11pm"
+"price_range":"$$"
+"price_range_num":2
+"restaurant_id":4068919073992378
+"cuisines":[...]4 items
+"address":{...}5 items
+"geo":{...}2 items
+"menus":[]0 items
+"last_updated":"2021-01-05T07:35:38.231Z"
+}
+1:{...}
+2:{...}
+3:{...}
+4:{...}
+5:{...}
+6:{...}
+7:{...}
+]
 }
 ```
 
 ---
 
-## **FOR STUFF THAT HANDLES RESULT SETS:**
+### FOR STUFF THAT HANDLES RESULT SETS:
 
-### **SAVE A RESULT SET**
+### SAVE A RESULT SET
 
 Example Request:
 
@@ -112,8 +108,8 @@ Example Request:
 fetch('https://you-choose-api.herokuapp.com/saveResult', {
     method: "POST"
     body: {
-        results: [], //an array of the top 3 restaurants
-        userId: , //The user's ID
+        top3: [], //an array of the top 3 restaurants
+        UserId: ,
     }
     headers: {
         'Content-Type': 'application/json',
@@ -125,18 +121,10 @@ fetch('https://you-choose-api.herokuapp.com/saveResult', {
 Example Response:
 
 ```javascript
-{
-    "message": "Results saved",
-    "results": [
-        "Happy's",
-        "Tacos",
-        "Taconios"
-    ]
-}
 
 ```
 
-### **DELETE A RESULT SET**
+### DELETE A RESULT SET
 
 Example Request:
 
@@ -145,7 +133,6 @@ fetch('https://you-choose-api.herokuapp.com/deleteResult', {
     method: "POST"
     body: {
         resultId: ,
-        userId:
     }
     headers: {
         'Content-Type': 'application/json',
@@ -157,13 +144,10 @@ fetch('https://you-choose-api.herokuapp.com/deleteResult', {
 Example Response:
 
 ```javascript
-{
-    "message": "Successfully deleted!"
-}
 
 ```
 
-### **VIEW A LIST OF ALL RESULT SETS SAVED TO AN ACCOUNT**
+### VIEW A LIST OF ALL RESULT SETS SAVED TO AN ACCOUNT
 
 Example Request:
 
@@ -174,40 +158,20 @@ fetch('https://you-choose-api.herokuapp.com/getResults', {
         'Content-Type': 'application/json',
         Authorization: <token>
     }
-    body: {
-        'userId': <userID>
-    }
 })
 ```
+
 Example Response:
 
 ```javascript
-{ 
-    "message": "View your previous results",
-    "results": [
-    {
-        "_id": "618ad0da44f6b99c65c266b2",
-        "resultSet": [
-            "McDonalds",
-            "Wendys"
-        ]},
-    {
-        "_id": "618ad0da44f6b99c65c266b3",
-        "resultSet": [
-            "Five Guys",
-            "Walmart"
-        ]
-    }]
-}  
 
 ```
-**Note the resultSet response.** The result set will be in rank order. The array item at index 0 will be first place, index 1 will be second place, and index 2 will be third place. *(array[0] - First, array[1] - Second, array[2] - Third)*
 
 ---
 
-## **FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:**
+### FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:
 
-### **Login a User**
+### LOGIN A USER
 
 Example Request:
 
@@ -238,7 +202,7 @@ Example Response:
     }      
 ```
 
-### **SIGN UP A NEW USER**
+### SIGN A NEW USER UP
 
 Example Request:
 
@@ -251,24 +215,14 @@ fetch('https://you-choose-api.herokuapp.com/signup', {
         confirmPassword: ,
     }
     headers: {
-        'Content-Type': 
+        'Content-Type': 'application/json'
     }
 })
 ```
 Email must be a valid email.
-
-
-
-
 Password Requirements:
-* Length:
-* Characters:
-
-Password Requirements: Must be at least 5 characters and only alphanumeric characters
-
 
 Example Response:
-
 
 ```javascript
     {
