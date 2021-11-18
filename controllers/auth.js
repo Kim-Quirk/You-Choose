@@ -5,6 +5,8 @@ const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const mongoose = require('mongoose');
+
 const User = require("../models/user");
 
 const transporter = nodemailer.createTransport(
@@ -27,7 +29,9 @@ exports.postLogin = (req, res, next) => {
       if (!user) {
         const error = new Error('A user with this email could not be found.');
         error.statusCode = 401;
-        throw error;
+        return res.status(401).json({
+          message: error,
+        });
       }
       loadedUser = user;
       return bcrypt.compare(password, user.password);
@@ -36,7 +40,9 @@ exports.postLogin = (req, res, next) => {
       if (!isEqual) {
         const error = new Error('Wrong password!');
         error.statusCode = 401;
-        throw error;
+        return res.status(401).json({
+          message: error,
+        });
       }
       const token = jwt.sign(
         {
@@ -61,14 +67,16 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   console.log(errors)
-  //   const error = new Error("Validation failed.");
-  //   error.statusCode = 422;
-  //   error.data = errors.array();
-  //   throw error;
-  // }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors)
+    const error = new Error("Validation failed.");
+    error.statusCode = 422;
+    error.data = errors.array();
+    return res.status(422).json({
+      message: error,
+    });
+  }
   const email = req.body.email;
   const password = req.body.password;
 
