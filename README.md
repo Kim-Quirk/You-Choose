@@ -33,8 +33,9 @@ Example Response:
 ```
 
 ### CHECK IF A ROOM EXISTS
+
 ```javascript
-fetch('https://you-choose-api.herokuapp.com/roomExists?roomId={num}')
+fetch("https://you-choose-api.herokuapp.com/roomExists?roomId={num}");
 ```
 
 Example Response:
@@ -121,7 +122,14 @@ fetch('https://you-choose-api.herokuapp.com/saveResult', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "Results saved",
+    "results": [
+        "Test1",
+        "Test2",
+        "Test3"
+    ]
+}
 ```
 
 ### DELETE A RESULT SET
@@ -130,7 +138,7 @@ Example Request:
 
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/deleteResult', {
-    method: "POST"
+    method: "DELETE"
     body: {
         resultId: ,
     }
@@ -144,7 +152,9 @@ fetch('https://you-choose-api.herokuapp.com/deleteResult', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "Successfully deleted!"
+}
 ```
 
 ### VIEW A LIST OF ALL RESULT SETS SAVED TO AN ACCOUNT
@@ -164,9 +174,20 @@ fetch('https://you-choose-api.herokuapp.com/getResults', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "View your previous results",
+    "results": [
+        {
+            "_id": "6196b2313c2d67db07ff05c7",
+            "resultSet": [
+                "Test1",
+                "Test2",
+                "Test3"
+            ]
+        }
+    ]
+}
 ```
-
 ---
 
 ### FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:
@@ -190,8 +211,6 @@ fetch('https://you-choose-api.herokuapp.com/login', {
 })
 ```
 
-
-
 Example Response:
 
 ```javascript
@@ -199,7 +218,7 @@ Example Response:
         "message": "Login Successful!",
         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQG1lLmNvbSIsInVzZXJJZCI6IjYxODJmMzBiNzk3MjhmZWRlYzhkMDY2NiIsImlhdCI6MTYzNTk3MjYxMSwiZXhwIjoxNjM2MDU5MDExfQ.lpiph4KyhV3-GP5hNtEH5F9T_NG-C-BgciV59PZ2pdU",
         "userId": "6182f30b79728fedec8d0666"
-    }      
+    }
 ```
 
 ### SIGN A NEW USER UP
@@ -219,6 +238,7 @@ fetch('https://you-choose-api.herokuapp.com/signup', {
     }
 })
 ```
+
 Email must be a valid email.
 Password Requirements:
 
