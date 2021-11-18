@@ -10,7 +10,7 @@ Each request should include a body and headers.For requests that require the use
 
 ---
 
-### FOR STUFF THAT HANDLES SESSIONS:
+## **FOR STUFF THAT HANDLES SESSIONS:**
 
 ### CREATE A NEW SESSION:
 
@@ -99,7 +99,7 @@ data:[
 
 ---
 
-### FOR STUFF THAT HANDLES RESULT SETS:
+## **FOR STUFF THAT HANDLES RESULT SETS:**
 
 ### SAVE A RESULT SET
 
@@ -190,7 +190,7 @@ Example Response:
 ```
 ---
 
-### FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:
+## **FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:**
 
 ### LOGIN A USER
 
@@ -202,8 +202,6 @@ fetch('https://you-choose-api.herokuapp.com/login', {
     body: {
         email: ,
         password: ,
-
-
     }
     headers: {
         'Content-Type': 'application/json'
@@ -216,7 +214,7 @@ Example Response:
 ```javascript
       {
         "message": "Login Successful!",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQG1lLmNvbSIsInVzZXJJZCI6IjYxODJmMzBiNzk3MjhmZWRlYzhkMDY2NiIsImlhdCI6MTYzNTk3MjYxMSwiZXhwIjoxNjM2MDU5MDExfQ.lpiph4KyhV3-GP5hNtEH5F9T_NG-C-BgciV59PZ2pdU",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJlbWFpbCI6Im1lQG1lLmNvbSIsInVzZXJJZCI6IjYxODJmMzBiNzk3MjhmZWRlYzhkMDY2NiIsImlhdCI6MTYzNTk3MjYxMSwiZXhwIjoxNjM2MDU5MDExfQ.lpiph4KyhV3-GP5hNtEH5F9T_NG-C-BgciV59PZ2pdU",
         "userId": "6182f30b79728fedec8d0666"
     }
 ```
@@ -229,9 +227,8 @@ Example Request:
 fetch('https://you-choose-api.herokuapp.com/signup', {
     method: "POST"
     body: {
-        email: ,
-        password: ,
-        confirmPassword: ,
+        email: <email>,
+        password: <password>
     }
     headers: {
         'Content-Type': 'application/json'
@@ -240,13 +237,16 @@ fetch('https://you-choose-api.herokuapp.com/signup', {
 ```
 
 Email must be a valid email.
+
 Password Requirements:
+* Minimum of 5 characters
+* Is alphanumeric (no special characters)
 
 Example Response:
 
 ```javascript
-    {
+{
     "message": "User created!",
     "userId": "6182f30b79728fedec8d0666"
-    }
+}
 ```

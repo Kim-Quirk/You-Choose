@@ -13,7 +13,7 @@ router.post('/saveResult', isAuth, controller.postSave);
 router.delete('/deleteResult', isAuth, controller.postDelete);
 // router.post('/deleteResult', controller.postDelete);
 
-//get all saved results
+//get all saved results for specific user
 router.get('/getResults', isAuth, controller.getResults);
 // router.get('/getResults', controller.getResults);
 
