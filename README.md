@@ -10,7 +10,7 @@ Each request should include a body and headers.For requests that require the use
 
 ---
 
-### FOR STUFF THAT HANDLES SESSIONS:
+## **FOR STUFF THAT HANDLES SESSIONS:**
 
 ### CREATE A NEW SESSION:
 
@@ -33,8 +33,9 @@ Example Response:
 ```
 
 ### CHECK IF A ROOM EXISTS
+
 ```javascript
-fetch('https://you-choose-api.herokuapp.com/roomExists?roomId={num}')
+fetch("https://you-choose-api.herokuapp.com/roomExists?roomId={num}");
 ```
 
 Example Response:
@@ -98,7 +99,7 @@ data:[
 
 ---
 
-### FOR STUFF THAT HANDLES RESULT SETS:
+## **FOR STUFF THAT HANDLES RESULT SETS:**
 
 ### SAVE A RESULT SET
 
@@ -121,7 +122,14 @@ fetch('https://you-choose-api.herokuapp.com/saveResult', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "Results saved",
+    "results": [
+        "Test1",
+        "Test2",
+        "Test3"
+    ]
+}
 ```
 
 ### DELETE A RESULT SET
@@ -130,7 +138,7 @@ Example Request:
 
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/deleteResult', {
-    method: "POST"
+    method: "DELETE"
     body: {
         resultId: ,
     }
@@ -144,7 +152,9 @@ fetch('https://you-choose-api.herokuapp.com/deleteResult', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "Successfully deleted!"
+}
 ```
 
 ### VIEW A LIST OF ALL RESULT SETS SAVED TO AN ACCOUNT
@@ -164,12 +174,23 @@ fetch('https://you-choose-api.herokuapp.com/getResults', {
 Example Response:
 
 ```javascript
-
+{
+    "message": "View your previous results",
+    "results": [
+        {
+            "_id": "6196b2313c2d67db07ff05c7",
+            "resultSet": [
+                "Test1",
+                "Test2",
+                "Test3"
+            ]
+        }
+    ]
+}
 ```
-
 ---
 
-### FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:
+## **FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:**
 
 ### LOGIN A USER
 
@@ -181,8 +202,6 @@ fetch('https://you-choose-api.herokuapp.com/login', {
     body: {
         email: ,
         password: ,
-
-
     }
     headers: {
         'Content-Type': 'application/json'
@@ -190,16 +209,14 @@ fetch('https://you-choose-api.herokuapp.com/login', {
 })
 ```
 
-
-
 Example Response:
 
 ```javascript
       {
         "message": "Login Successful!",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1lQG1lLmNvbSIsInVzZXJJZCI6IjYxODJmMzBiNzk3MjhmZWRlYzhkMDY2NiIsImlhdCI6MTYzNTk3MjYxMSwiZXhwIjoxNjM2MDU5MDExfQ.lpiph4KyhV3-GP5hNtEH5F9T_NG-C-BgciV59PZ2pdU",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. eyJlbWFpbCI6Im1lQG1lLmNvbSIsInVzZXJJZCI6IjYxODJmMzBiNzk3MjhmZWRlYzhkMDY2NiIsImlhdCI6MTYzNTk3MjYxMSwiZXhwIjoxNjM2MDU5MDExfQ.lpiph4KyhV3-GP5hNtEH5F9T_NG-C-BgciV59PZ2pdU",
         "userId": "6182f30b79728fedec8d0666"
-    }      
+    }
 ```
 
 ### SIGN A NEW USER UP
@@ -210,23 +227,26 @@ Example Request:
 fetch('https://you-choose-api.herokuapp.com/signup', {
     method: "POST"
     body: {
-        email: ,
-        password: ,
-        confirmPassword: ,
+        email: <email>,
+        password: <password>
     }
     headers: {
         'Content-Type': 'application/json'
     }
 })
 ```
+
 Email must be a valid email.
+
 Password Requirements:
+* Minimum of 5 characters
+* Is alphanumeric (no special characters)
 
 Example Response:
 
 ```javascript
-    {
+{
     "message": "User created!",
     "userId": "6182f30b79728fedec8d0666"
-    }
+}
 ```

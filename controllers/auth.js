@@ -13,12 +13,13 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-      process.env.SENDGRID_KEY //Test
+      process.env.SENDGRID_KEY
     }
   })
 );
 
-
+// Takes in an email and password
+// Returns a success or specific error message
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -28,9 +29,10 @@ exports.postLogin = (req, res, next) => {
     .then(user => {
       if (!user) {
         const error = new Error('A user with this email could not be found.');
-        error.statusCode = 401;
+        // error.statusCode = 401;
         return res.status(401).json({
-          message: error,
+          message: "Error",
+          error: error.message
         });
       }
       loadedUser = user;
@@ -39,9 +41,10 @@ exports.postLogin = (req, res, next) => {
     .then(isEqual => {
       if (!isEqual) {
         const error = new Error('Wrong password!');
-        error.statusCode = 401;
+        // error.statusCode = 401;
         return res.status(401).json({
-          message: error,
+          message: "Error",
+          error: error.message
         });
       }
       const token = jwt.sign(
@@ -66,15 +69,18 @@ exports.postLogin = (req, res, next) => {
     });
 };
 
+// Takes in an email and password
+// Returns a success message and the user ID
 exports.postSignup = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors)
     const error = new Error("Validation failed.");
-    error.statusCode = 422;
+    // error.statusCode = 422;
     error.data = errors.array();
     return res.status(422).json({
-      message: error,
+      message: "Error",
+      error: error.message
     });
   }
   const email = req.body.email;

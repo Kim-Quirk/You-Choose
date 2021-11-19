@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 
 Documenu.configure(process.env.API_KEY);
 
-//save result. delete. view
+//save result set to a user.
+// Takes in a UserID and a result set as an array (no size requirements).
 exports.postSave = (req, res, next) => {
     const results = req.body.results;
     const userId = req.body.userId;
@@ -26,7 +27,7 @@ exports.postSave = (req, res, next) => {
                 user.save().catch(err => {
                     const error = new Error(err);
                     return res.status(500).json({
-                        message: "An Error occured while saving",
+                        message: "Error",
                         error: error
                     });
                 });
@@ -39,13 +40,15 @@ exports.postSave = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "An Error occured",
+                message: "Error",
                 error: error
             });
         });
 };
 
-// This function works... however, if they send in an ID that does not exist, it returns it as a success...
+// Deltes a result set
+// Takes in a result ID and a user ID.
+// Returns an error or a success message.
 exports.postDelete = (req, res, next) => {
     const resultId = req.body.resultId;
     const userId = req.body.userId;
@@ -74,58 +77,16 @@ exports.postDelete = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "An Error occured",
+                message: "Error",
                 error: error
             });
         });
 }
 
-// exports.postDelete = (req, res, next) => {
-//     const resultId = req.body.resultId;
-//     const userId = req.body.userId;
-//     User.findOne({
-//             _id: userId
-//         })
-//         .then(user => {
-//             if (!user) {
-//                 return res.status(422).json({
-//                     message: "This user does not exist. No results found."
-//                 });
-//             } else {
-//                 user.savedResults.results.findOne({
-//                         _id: resultId,
-//                     })
-//                     .then(result => {
-//                         if (!result) {
-//                             return res.status(422).json({
-//                                 message: "This result set does not exist. No results found."
-//                             });
-//                         } else {
-//                             delete result;
-//                         }
-//                     })
-//                     .catch(err => {
-//                         const error = new Error(err);
-// return res.status(500).json({
-//     message: "An Error occured while saving",
-//     error: error
-// });
-//                     });
-// return res.status(200).json({
-//     message: "The following results were deleted",
-//     results: results
-// });
-//             }
-//         })
-//         .catch(err => {
-//             const error = new Error(err);
-//             res.status(500).json({
-//                 message: "An Error occured",
-//                 error: error
-//             });
-//         });
-// };
-
+// Gets all the saved results for one user
+// Gets a user ID
+// Does not yet check if the logged in user is the userID being sent in.
+// Returns an array of objects with arrays of results (look at readme for example responses)
 exports.getResults = (req, res, next) => {
     const userId = req.body.userId;
     User.findOne({
@@ -147,7 +108,7 @@ exports.getResults = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "An Error occured",
+                message: "Error",
                 error: error
             });
         });
