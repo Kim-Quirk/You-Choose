@@ -41,7 +41,20 @@ exports.createSession = (req, res, next) => {
 //check if a room someone is trying to join is set up
 //get roomId from query params
 exports.roomExists = (req, res, next) => {
+  let roomId = req.query.roomId;
 
+  RoomId.findOne({ idCode: roomId }).then(room => {
+    if (room) {
+      return res.status(200).json({
+        message: `room ${roomId} exists.`,
+        roomExists: true
+      })
+    }
+    res.status(404).json({
+      message: `room ${roomId} does not exist.`,
+      roomExists: false
+    })
+  })
 }
 
 
