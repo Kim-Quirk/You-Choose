@@ -76,15 +76,8 @@ io.on('connection', async (socket) => {
 	}
 	joinAlert();
 
-	socket.on('start-session', (roomId) => {
-		const restaurants = getRestaurants().map((restaurant) => ({
-			...restaurant,
-			// score of the vote
-			vote: 0,
-			// num of people who have voted
-			voteCount: 0
-		}));
-		addRestaurantsToDb(roomId, restaurants)
+	socket.on('start-session', async (roomId) => {
+		const restaurants = await getRestaurants(roomId);
 		startSession(socket, roomId, restaurants);
 		
 	});
@@ -118,19 +111,6 @@ io.on('connection', async (socket) => {
 
 	});
 });  
-
-
-//take an array of restaurants and add it to the database to associate with the roomId
-async function addRestaurantsToDb(roomId, restaurants) {
-	return await RoomId.findOne({ idCode: roomId })
-		.then((room) => {
-			room.allRestaurants = restaurants;
-			return room.save();
-		})
-		.catch(err => {
-			console.log(err)
-		})
-}
 
 // sets up potential socket connections
 function createSocketConnection(server) {
@@ -204,8 +184,11 @@ function getUserCount(roomId) {
 	return count;
 }
 
-function getRestaurants() {
-	return testData.restaurants.data;
+//TODO: look up restaurants attached to the room and return them
+async function getRestaurants(roomId) {
+	return await RoomId.findOne({ idCode: roomId }).then(room => {
+		return room.allRestaurants;
+	})
 }
 
 function pickBestRestaurant(restaurants, roomId) {

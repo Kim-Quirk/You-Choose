@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     if (!authHeader) {
         const error = new Error('Not authenticated');
         return res.status(401).json({
-            message: "An Error occured",
+            message: "You do not have permission",
             error: error
         });
         // error.StatusCode = 401;
@@ -26,7 +26,7 @@ module.exports = (req, res, next) => {
     if (!decodedToken) {
         const error = new Error('Not authenticated');
         return res.status(401).json({
-            message: "An Error occured",
+            message: "You do not have permission",
             error: error
         });
         // error.statusCode = 401;
