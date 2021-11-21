@@ -2,14 +2,15 @@
 const RoomId = require("../models/roomId");
 const session = require("../socket");
 const testData = require("../data/sampleData");
+const Documenu = require('documenu');
+Documenu.configure(process.env.API_KEY);
 
-//for setting up a session so people can join it
+// for setting up a session so people can join it
+// also get restaurant data and store that to the room in the database
 exports.createSession = (req, res, next) => {
-  //TODO: generate new roomId and store in db
   //Store something called nextRoomId that increments every time a new id is needed
-
   RoomId.findOne({ name: "nextRoomId" })
-    .then((room) => {
+    .then(async (room) => {
       if (!room) {
         //Default roomId if not found: 100000
         const nextId = new RoomId({
@@ -23,18 +24,34 @@ exports.createSession = (req, res, next) => {
       room.idCode++;
       room.save();
 
+      //here is the spot to get the data:
+      let restaurantData = await getData(req, res, next)
+
       const currentRoom = new RoomId({
         idCode: roomId,
+        allRestaurants: restaurantData.map((restaurant) => ({
+          ...restaurant,
+          // score of the vote
+          vote: 0,
+          // num of people who have voted
+          voteCount: 0
+        }))
+        
       });
       currentRoom.save();
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Session created",
         roomId: roomId,
+        roomInfo: currentRoom
       });
     })
     .catch((err) => {
-      res.status(500).send();
+      res.status(500).json({
+        msg: 'error ocurred',
+        error: err
+      });
+      console.log(err)
     });
 };
 
@@ -49,41 +66,32 @@ exports.roomExists = (req, res, next) => {
 //KIM
 //Assume you are getting these from the frontend:
 //FILL IN INFO YOU NEED HERE
-exports.getData = (req, res, next) => {
-  var data = new Object();
-  let lat = req.params.lat;
-  let lon = req.params.lon;
+async function getData(req, res, next) {
+  let lat = req.body.lat;
+  let lon = req.body.lon;
   let radius;
-  if (!req.params.radius) {
+  if (!req.body.radius) {
     radius = 5;
   } else {
-    radius = req.params.radius;
+    radius = req.body.radius;
   }
-  if (!req.params.lat || !req.params.lon) {
-    return res.status(200).json({
-      message: "Improperly defined query. Failed to retrieve data.",
-    });
+  if (!req.body.lat || !req.body.lon) {
+      return new Error("Improperly defined query. Failed to retrieve data.")
   }
-  // This should come form the front end. Temporarily hard coded in for testing.
+
   const params = {
     lat: lat,
     lon: lon,
     distance: radius,
   };
-  Documenu.Restaurants.searchGeo(params)
-    .then((response) => {
-      data = response.data;
-      console.log(data);
-      return res.status(200).json({
-        message: "here are your results",
-        Restaurants: data,
-      });
-    })
 
+  return await Documenu.Restaurants.searchGeo(params)
+    .then((response) => {
+      return response.data;
+    })
     .catch((err) => {
       console.log("Unsuccessful response: ", err);
-      return res.status(200).json({
-        message: "Some error occured.",
-      });
+      return err
     });
+
 };

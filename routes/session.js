@@ -6,9 +6,7 @@ const isAuth = require('../middleware/is-auth');
 
 const controller = require('../controllers/session')
 
-router.get('/createSession', isAuth, controller.createSession);
-
-router.get('/getRestaurantData', controller.getData);
+router.post('/createSession', isAuth, controller.createSession);
 
 router.get('/roomExists', controller.roomExists);
 

@@ -23,7 +23,8 @@ const transporter = nodemailer.createTransport(
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const tokenExpiryTime = 24;
+  //one week
+  const tokenExpiryTime = 168;
   let loadedUser;
   User.findOne({ email: email })
     .then(user => {
