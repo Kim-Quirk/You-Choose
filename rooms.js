@@ -146,6 +146,18 @@ exports.allowSocketConnection = (server) => {
         })
         let top3 = [restaurants[0].restaurant_name, restaurants[1].restaurant_name, restaurants[2].restaurant_name]
         io.to(roomId).emit('finish', top3);
+
+        //clean up rooms
+        RoomId.deleteOne({ idCode: roomId }).then(result => {
+            console.log(result)
+        }).catch(err => {
+            if (err instanceof VersionError) {
+                return console.log(err)
+            }
+            else {
+                console.log(err)
+            }
+        })
         
     }
     }
