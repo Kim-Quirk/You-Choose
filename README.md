@@ -245,11 +245,24 @@ Password Requirements:
 * Minimum of 5 characters
 * Is alphanumeric (no special characters)
 
-Example Response:
+Example Responses:
 
 ```javascript
 {
     "message": "User created!",
     "userId": "6182f30b79728fedec8d0666"
+}
+```
+```javascript
+{
+    "message": "Error",
+    "error": [
+        {
+            "value": "",
+            "msg": "Please enter a valid email.",
+            "param": "email",
+            "location": "body"
+        }
+    ]
 }
 ```
