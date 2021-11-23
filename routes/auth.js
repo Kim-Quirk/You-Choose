@@ -44,6 +44,12 @@ router.post(
         .isLength({ min: 5 })
         .isAlphanumeric()
         .trim()
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Passwords have to match!');
+            }
+            return true;
+        })
     ],
      controller.postSignup);
 
