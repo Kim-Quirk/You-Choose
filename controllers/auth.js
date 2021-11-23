@@ -73,6 +73,8 @@ exports.postLogin = (req, res, next) => {
 // Takes in an email and password
 // Returns a success message and the user ID
 exports.postSignup = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors)
@@ -81,12 +83,9 @@ exports.postSignup = (req, res, next) => {
     error.data = errors.array();
     return res.status(422).json({
       message: "Error",
-      error: error.message
+      error: errors.errors
     });
   }
-  const email = req.body.email;
-  const password = req.body.password;
-
   bcrypt
     .hash(password, 13)
     .then(hashedPw => {
