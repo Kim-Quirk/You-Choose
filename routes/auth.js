@@ -43,6 +43,8 @@ router.post(
         )
         .isLength({ min: 5 })
         .isAlphanumeric()
+        .trim(),
+        body('confirmPassword')
         .trim()
         .custom((value, { req }) => {
             if (value !== req.body.password) {
