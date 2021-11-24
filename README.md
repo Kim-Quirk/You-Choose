@@ -232,6 +232,9 @@ fetch('https://you-choose-api.herokuapp.com/signup', {
     body: {
         email: <email>,
         password: <password>
+        confirmPassword : <confirmPassword>
+        {    
+}
     }
     headers: {
         'Content-Type': 'application/json'
