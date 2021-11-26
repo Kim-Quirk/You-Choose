@@ -20,10 +20,12 @@ exports.allowSocketConnection = (server) => {
         joinAlert();
     
         socket.on('start-session', async (roomId) => {
+            await resetNumbers(roomId)
             const restaurants = await getRestaurants(roomId);
             startSession(socket, roomId, restaurants);
-            
+
         });
+
     
         //Stuff that happens when a user clicks 'like' or 'dislike'
         socket.on('countResult', (result) => {
@@ -127,10 +129,22 @@ exports.allowSocketConnection = (server) => {
         return count;
     }
     
-    //TODO: look up restaurants attached to the room and return them
+    // look up restaurants attached to the room and return them
     async function getRestaurants(roomId) {
         return await RoomId.findOne({ idCode: roomId }).then(room => {
             return room.allRestaurants;
+        })
+    }
+
+    // reset vote and voteCount to 0 for development and testing purposes
+    async function resetNumbers(roomId) {
+        return await RoomId.findOne({ idCode: roomId }).then(room => {
+            room.allRestaurants.forEach(restaurant => {
+                restaurant.vote = 0;
+                restaurant.voteCount = 0;
+            })
+            room.save();
+            console.log(room)
         })
     }
     
@@ -148,16 +162,16 @@ exports.allowSocketConnection = (server) => {
         io.to(roomId).emit('finish', top3);
 
         //clean up rooms
-        RoomId.deleteOne({ idCode: roomId }).then(result => {
-            console.log(result)
-        }).catch(err => {
-            if (err instanceof VersionError) {
-                return console.log(err)
-            }
-            else {
-                console.log(err)
-            }
-        })
+        // RoomId.deleteOne({ idCode: roomId }).then(result => {
+        //     console.log(result)
+        // }).catch(err => {
+        //     if (err instanceof VersionError) {
+        //         return console.log(err)
+        //     }
+        //     else {
+        //         console.log(err)
+        //     }
+        // })
         
     }
     }
