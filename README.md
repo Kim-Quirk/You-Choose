@@ -18,7 +18,12 @@ Example Rquest:
 
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/createSession', {
-    method: "GET"
+    method: "POST"
+    body: {
+	"lat": "43.8231",
+	"lon": "-111.7924",
+	"radius": "5"
+    }
     headers: {
         'Content-Type': 'application/json',
         Authorization: <token>
