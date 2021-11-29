@@ -82,10 +82,11 @@ exports.roomExists = (req, res, next) => {
 }
 
 
-//THis is where you connect to the restaurant api and get the data to send.
+//This is where you connect to the restaurant api and get the data to send.
 //KIM
 //Assume you are getting these from the frontend:
-//FILL IN INFO YOU NEED HERE
+//NEED: Lat, Lon
+//OPTIONAL: Radius
 async function getData(req, res, next) {
   let lat = req.body.lat;
   let lon = req.body.lon;

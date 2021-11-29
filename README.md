@@ -46,7 +46,7 @@ fetch("https://you-choose-api.herokuapp.com/roomExists?roomId={num}");
 Example Response:
 
 ```javascript
-    {
+{
     "message": "room 100035 exists.",
     "roomExists": true
 }
