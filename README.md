@@ -46,7 +46,7 @@ fetch("https://you-choose-api.herokuapp.com/roomExists?roomId={num}");
 Example Response:
 
 ```javascript
-    {
+{
     "message": "room 100035 exists.",
     "roomExists": true
 }
@@ -148,7 +148,8 @@ Example Request:
 fetch('https://you-choose-api.herokuapp.com/deleteResult', {
     method: "DELETE"
     body: {
-        resultId: ,
+        resultId: '',
+        userId: ''
     }
     headers: {
         'Content-Type': 'application/json',
@@ -172,6 +173,9 @@ Example Request:
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/getResults', {
     method: "GET"
+    body: {
+        userId: '',
+    }
     headers: {
         'Content-Type': 'application/json',
         Authorization: <token>

@@ -45,7 +45,7 @@ exports.postLogin = (req, res, next) => {
         // error.statusCode = 401;
         return res.status(401).json({
           message: "Error",
-          error: error.message
+          error: error
         });
       }
       const token = jwt.sign(
@@ -83,8 +83,7 @@ exports.postSignup = (req, res, next) => {
     error.data = errors.array();
     return res.status(422).json({
       message: "Error",
-      error: errors.errors,
-      error: error.message
+      error: errors.errors
     });
   }
   bcrypt

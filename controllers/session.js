@@ -16,8 +16,8 @@ const {
 exports.createSession = (req, res, next) => {
   //Store something called nextRoomId that increments every time a new id is needed
   RoomId.findOne({
-    name: "nextRoomId"
-  })
+      name: "nextRoomId"
+    })
     .then(async (room) => {
       if (!room) {
         //Default roomId if not found: 100000
@@ -49,11 +49,11 @@ exports.createSession = (req, res, next) => {
       currentRoom.save();
 
       return res.status(200).json({
-        message: "Session created",
-        roomId: roomId,
-        roomInfo: currentRoom
-    
-      })
+          message: "Session created",
+          roomId: roomId,
+          roomInfo: currentRoom
+
+        })
         .catch((err) => {
           res.status(500).json({
             Message: 'An error ocurred',
@@ -62,79 +62,73 @@ exports.createSession = (req, res, next) => {
           console.log(err)
         });
     });
+}
 
+//check if a room someone is trying to join is set up
+//get roomId from query params
+exports.roomExists = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array()
+    });
+  }
+  let roomId = req.query.roomId;
 
-  //check if a room someone is trying to join is set up
-  //get roomId from query params
-  exports.roomExists = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array()
-      });
-    }
-    let roomId = req.query.roomId;
-
-    RoomId.findOne({
-      idCode: roomId
-    }).then(room => {
-      if (room) {
-        return res.status(200).json({
-          message: `room ${roomId} exists.`,
-          roomExists: true
-        })
-      }
-      res.status(404).json({
-        message: `room ${roomId} does not exist.`,
-        roomExists: false
+  RoomId.findOne({
+    idCode: roomId
+  }).then(room => {
+    if (room) {
+      return res.status(200).json({
+        message: `room ${roomId} exists.`,
+        roomExists: true
       })
-    })
+    }
+    res.status(404).json({
+      message: `room ${roomId} does not exist.`,
+      roomExists: false
+    });
+  })
+}
 
+
+//THis is where you connect to the restaurant api and get the data to send.
+//KIM
+//Assume you are getting these from the frontend:
+//FILL IN INFO YOU NEED HERE
+async function getData(req, res, next) {
+  let lat = req.body.lat;
+  let lon = req.body.lon;
+  let radius;
+  if (!req.body.radius) {
+    radius = 5;
+  } else {
+    radius = req.body.radius;
+  }
+  if (!req.body.lat || !req.body.lon) {
+    throw new Error("Improperly defined query. Failed to retrieve data.");
   }
 
-
-  //THis is where you connect to the restaurant api and get the data to send.
-  //KIM
-  //Assume you are getting these from the frontend:
-  //FILL IN INFO YOU NEED HERE
-  async function getData(req, res, next) {
-    let lat = req.body.lat;
-    let lon = req.body.lon;
-    let radius;
-    if (!req.body.radius) {
-      radius = 5;
-    } else {
-      radius = req.body.radius;
-    }
-    if (!req.body.lat || !req.body.lon) {
-      throw new Error("Improperly defined query. Failed to retrieve data.");
-    }
-
-    const params = {
-      lat: lat,
-      lon: lon,
-      distance: radius,
-    };
-
-    return await Documenu.Restaurants.searchGeo(params)
-      .then((response) => {
-        if (!response.data || response.data.length == 0) {
-          // return res.status(400).json({
-          //   message: "No restaurants found with the provided query.",
-          // });
-          throw new Error("No restaurants found with the provided query.");
-        } else {
-          return response.data;
-        }
-      })
-      .catch((err) => {
-        console.log("Unsuccessful response: ", err);
-        // return res.status(500).json({
-        //   message: "Unsuccessful response",
-        //   error: err
-        // });
-        throw new Error(err.message);
-      });
-
+  const params = {
+    lat: lat,
+    lon: lon,
+    distance: radius,
   };
-}
+
+  return await Documenu.Restaurants.searchGeo(params)
+    .then((response) => {
+      if (!response.data || response.data.length == 0) {
+        throw new Error("No restaurants found with the provided query.");
+      } else {
+        return response.data;
+      }
+    })
+    .catch((err) => {
+      console.log("Unsuccessful response: ", err);
+      // return res.status(500).json({
+      //   message: "Unsuccessful response",
+      //   error: err
+      // });
+      throw new Error(err.message);
+    });
+};
