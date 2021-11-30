@@ -17,7 +17,7 @@ module.exports = (req, res, next) => {
     } catch (err) {
         const error = new Error(err);
         return res.status(500).json({
-            message: "An Error occured",
+            message: "Failed to confirm token",
             error: error
         });
         // err.statusCode = 500;

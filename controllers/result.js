@@ -108,7 +108,7 @@ exports.getResults = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "Error",
+                message: "This user does not exist",
                 error: error
             });
         });
