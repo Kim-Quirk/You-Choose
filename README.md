@@ -117,8 +117,8 @@ Example Request:
 fetch('https://you-choose-api.herokuapp.com/saveResult', {
     method: "POST"
     body: {
-        top3: [], //an array of the top 3 restaurants
-        UserId: ,
+        results: [], //an array of the top 3 restaurants
+        userId: ''
     }
     headers: {
         'Content-Type': 'application/json',
