@@ -9,8 +9,18 @@ Documenu.configure(process.env.API_KEY);
 // Takes in a UserID and a result set as an array (no size requirements).
 exports.postSave = (req, res, next) => {
     const results = req.body.results;
+    if (!results) {
+        return res.status(404).json({
+            message: "No results provided",
+            results: results
+        });
+    }
     const userId = req.body.userId;
-    
+    if (!userId) {
+        return res.status(404).json({
+            message: "No userID provided"
+        });
+    }
     User.findOne({
             _id: userId
         })
@@ -29,7 +39,7 @@ exports.postSave = (req, res, next) => {
                     const error = new Error(err);
                     return res.status(500).json({
                         message: "Error",
-                        error: error
+                        error: error.message
                     });
                 });
                 return res.status(200).json({
@@ -41,8 +51,8 @@ exports.postSave = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "Error",
-                error: error
+                message: "This user does not exist",
+                error: error.message
             });
         });
 };
@@ -59,7 +69,7 @@ exports.postDelete = (req, res, next) => {
         .then(user => {
             if (!user) {
                 return res.status(422).json({
-                    message: "This user does not exist. No results found."
+                    message: "No userID provided."
                 });
             } else {
                 result = user.removeFromResults(resultId)
@@ -78,8 +88,8 @@ exports.postDelete = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "Error",
-                error: error
+                message: "This user does not exist. No results found.",
+                error: error.message
             });
         });
 }
@@ -109,8 +119,8 @@ exports.getResults = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "Error",
-                error: error
+                message: "This user does not exist",
+                error: error.message
             });
         });
 };

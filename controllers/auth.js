@@ -83,7 +83,8 @@ exports.postSignup = (req, res, next) => {
     error.data = errors.array();
     return res.status(422).json({
       message: "Error",
-      error: errors.errors
+      error: errors.errors,
+      error: error.message
     });
   }
   bcrypt
