@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         const error = new Error('Not authenticated');
         return res.status(401).json({
             message: "You do not have permission",
-            error: error
+            error: error.message
         });
         // error.StatusCode = 401;
         // throw error;
@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
         const error = new Error(err);
         return res.status(500).json({
             message: "Failed to confirm token",
-            error: error
+            error: error.message
         });
         // err.statusCode = 500;
         // throw err;
@@ -27,7 +27,7 @@ module.exports = (req, res, next) => {
         const error = new Error('Not authenticated');
         return res.status(401).json({
             message: "You do not have permission",
-            error: error
+            error: error.message
         });
         // error.statusCode = 401;
         // throw error;
