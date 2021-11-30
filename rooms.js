@@ -55,6 +55,11 @@ exports.allowSocketConnection = (server) => {
             })
     
         });
+
+        socket.on('redirect', (roomId) => {
+            io.sockets.in(roomId).emit('redirect')
+        })
+
     });  
     
     // sets up potential socket connections
