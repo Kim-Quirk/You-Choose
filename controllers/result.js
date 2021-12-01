@@ -15,7 +15,7 @@ exports.postSave = (req, res, next) => {
             results: results
         });
     }
-    const userId = req.body.userId;
+    const userId = req.userId;
     if (!userId) {
         return res.status(404).json({
             message: "No userID provided"
@@ -62,7 +62,7 @@ exports.postSave = (req, res, next) => {
 // Returns an error or a success message.
 exports.postDelete = (req, res, next) => {
     const resultId = req.body.resultId;
-    const userId = req.body.userId;
+    const userId = req.userId;
     User.findOne({
             _id: userId
         })
@@ -99,7 +99,7 @@ exports.postDelete = (req, res, next) => {
 // Does not yet check if the logged in user is the userID being sent in.
 // Returns an array of objects with arrays of results (look at readme for example responses)
 exports.getResults = (req, res, next) => {
-    const userId = req.body.userId;
+    const userId = req.userId;
     User.findOne({
             _id: userId
         })
