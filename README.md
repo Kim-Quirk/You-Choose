@@ -118,7 +118,6 @@ fetch('https://you-choose-api.herokuapp.com/saveResult', {
     method: "POST"
     body: {
         results: [], //an array of the top 3 restaurants
-        userId: ''
     }
     headers: {
         'Content-Type': 'application/json',
@@ -149,7 +148,6 @@ fetch('https://you-choose-api.herokuapp.com/deleteResult', {
     method: "DELETE"
     body: {
         resultId: '',
-        userId: ''
     }
     headers: {
         'Content-Type': 'application/json',
@@ -173,9 +171,6 @@ Example Request:
 ```javascript
 fetch('https://you-choose-api.herokuapp.com/getResults', {
     method: "GET"
-    body: {
-        userId: '',
-    }
     headers: {
         'Content-Type': 'application/json',
         Authorization: <token>
