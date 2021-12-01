@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const rooms = require('./rooms')
+const rooms = require('./rooms');
 
 const PORT = process.env.PORT || 3000;
 
@@ -24,8 +24,6 @@ const corsOptions = {
 	optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions));
-
 //fixing potential CORS blocking
 app.use((req, res, next) => {
 	//allow access from any client, or particular client
@@ -41,6 +39,8 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use(cors(corsOptions));
+
 app.use(authRoutes);
 app.use(resultRoutes);
 app.use(sessionRoutes);
@@ -52,9 +52,8 @@ app.use('/', (req, res, next) => {
 
 const server = app.listen(PORT);
 
-
 mongoose.connect(process.env.MONGODB_URI).catch((err) => {
 	console.log(err);
 });
 
-rooms.allowSocketConnection(server)
+rooms.allowSocketConnection(server);
