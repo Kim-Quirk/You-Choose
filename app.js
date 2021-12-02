@@ -19,28 +19,28 @@ const authRoutes = require('./routes/auth.js');
 const resultRoutes = require('./routes/result');
 const sessionRoutes = require('./routes/session');
 
-const corsOptions = {
-	origin: '',
-	optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+// 	origin: '',
+// 	optionsSuccessStatus: 200,
+// };
 
 //fixing potential CORS blocking
-app.use((req, res, next) => {
-	//allow access from any client, or particular client
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader(
-		'Access-Control-Allow-Methods',
-		'GET, POST, PUT, PATCH, DELETE'
-	);
-	res.setHeader(
-		'Access-Control-Allow-Headers',
-		'Content-Type, Authorization'
-	);
-	res.setHeader('Access-Control-Allow-Credentials', true)
-	next();
-});
+// app.use((req, res, next) => {
+// 	//allow access from any client, or particular client
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+// 	res.setHeader(
+// 		'Access-Control-Allow-Methods',
+// 		'GET, POST, PUT, PATCH, DELETE'
+// 	);
+// 	res.setHeader(
+// 		'Access-Control-Allow-Headers',
+// 		'Content-Type, Authorization'
+// 	);
+// 	res.setHeader('Access-Control-Allow-Credentials', true)
+// 	next();
+// });
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(authRoutes);
 app.use(resultRoutes);

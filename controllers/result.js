@@ -30,8 +30,10 @@ exports.postSave = (req, res, next) => {
                     message: "This user does not exist. No results found."
                 });
             } else {
+                let now = new Date();
                 let objectResults = {
                     _id: new mongoose.Types.ObjectId(),
+                    date: now,
                     resultSet: results
                 };
                 user.savedResults.results.push(objectResults);
@@ -61,6 +63,7 @@ exports.postSave = (req, res, next) => {
 // Takes in a result ID and a user ID.
 // Returns an error or a success message.
 exports.postDelete = (req, res, next) => {
+
     const resultId = req.body.resultId;
     const userId = req.userId;
     User.findOne({
@@ -75,7 +78,7 @@ exports.postDelete = (req, res, next) => {
                 result = user.removeFromResults(resultId)
                 console.log(result)
                 if (result) {
-                    return res.status(200).json({
+                    return res.status(204).json({
                         message: "Successfully deleted!",
                     });
                 } else {

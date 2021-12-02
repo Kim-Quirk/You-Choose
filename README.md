@@ -186,6 +186,7 @@ Example Response:
     "results": [
         {
             "_id": "6196b2313c2d67db07ff05c7",
+            "date": "2021-12-02T00:54:02.009Z",
             "resultSet": [
                 "Test1",
                 "Test2",
