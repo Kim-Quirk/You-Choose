@@ -1,6 +1,7 @@
 const Documenu = require('documenu');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const errormsg = require('../error');
 
 
 Documenu.configure(process.env.API_KEY);
@@ -9,26 +10,21 @@ Documenu.configure(process.env.API_KEY);
 // Takes in a UserID and a result set as an array (no size requirements).
 exports.postSave = (req, res, next) => {
     const results = req.body.results;
+    const errors = [];
     if (!results) {
-        return res.status(404).json({
-            message: "No results provided",
-            results: results
-        });
+        errors.push("No results provided");
     }
     const userId = req.userId;
     if (!userId) {
-        return res.status(404).json({
-            message: "No userID provided"
-        });
+        errors.push("No userID provided from decoded token");
     }
     User.findOne({
             _id: userId
         })
         .then(user => {
             if (!user) {
-                return res.status(422).json({
-                    message: "This user does not exist. No results found."
-                });
+                errors.push("No userID provided from decoded token");
+                console.log(errors);
             } else {
                 let now = new Date();
                 let objectResults = {
@@ -38,15 +34,19 @@ exports.postSave = (req, res, next) => {
                 };
                 user.savedResults.results.push(objectResults);
                 user.save().catch(err => {
-                    const error = new Error(err);
-                    return res.status(500).json({
-                        message: "Error",
-                        error: error.message
-                    });
+                    errors.push(err.message);
+                    console.log(errors);
                 });
+                if (errors.length !== 0) {
+                    err = errormsg(errors);
+                    return res.status(404).json({
+                        message: "One or more errors occured.",
+                        error: err
+                    });
+                }
                 return res.status(200).json({
                     message: "Results saved",
-                    results: results
+                    results: result
                 });
             }
         })
@@ -63,7 +63,7 @@ exports.postSave = (req, res, next) => {
 // Takes in a result ID and a user ID.
 // Returns an error or a success message.
 exports.postDelete = (req, res, next) => {
-
+    const errors = []
     const resultId = req.body.resultId;
     const userId = req.userId;
     User.findOne({
@@ -71,9 +71,7 @@ exports.postDelete = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
-                return res.status(422).json({
-                    message: "No userID provided."
-                });
+                errors.push("User not found by decoded token.");
             } else {
                 result = user.removeFromResults(resultId)
                 console.log(result)
@@ -82,10 +80,15 @@ exports.postDelete = (req, res, next) => {
                         message: "Successfully deleted!",
                     });
                 } else {
-                    return res.status(400).json({
-                        message: "An error occured. The result ID was not found.",
-                    });
+                    errors.push("The result ID was not found");
                 }
+            }
+            if (errors.length !== 0) {
+                err = errormsg(errors);
+                return res.status(404).json({
+                    message: "One or more errors occured.",
+                    error: err
+                });
             }
         })
         .catch(err => {
@@ -103,19 +106,25 @@ exports.postDelete = (req, res, next) => {
 // Returns an array of objects with arrays of results (look at readme for example responses)
 exports.getResults = (req, res, next) => {
     const userId = req.userId;
+    const errors = [];
     User.findOne({
             _id: userId
         })
         .then(user => {
             if (!user) {
-                return res.status(422).json({
-                    message: "This user does not exist. No results found."
-                });
+                errors.push("This user does not exist. No results found.");
             } else {
                 const results = user.savedResults.results;
                 return res.status(200).json({
                     message: "View your previous results",
                     results: results
+                });
+            }
+            if (errors.length !== 0) {
+                err = errormsg(errors);
+                return res.status(404).json({
+                    message: "One or more errors occured.",
+                    error: err
                 });
             }
         })
