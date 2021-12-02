@@ -22,6 +22,7 @@ const userSchema = new Schema({
         ref: 'Result',
         required: true
       },
+      date: {type: Date},
       resultSet: {
         type: Array,
         required: true
