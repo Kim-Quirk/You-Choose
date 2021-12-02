@@ -54,13 +54,6 @@ exports.createSession = (req, res, next) => {
           roomInfo: currentRoom
 
         })
-        .catch((err) => {
-          res.status(500).json({
-            Message: 'An error ocurred',
-            error: err.message
-          });
-          console.log(err)
-        });
     });
 }
 
@@ -97,22 +90,64 @@ exports.roomExists = (req, res, next) => {
 //Assume you are getting these from the frontend:
 //FILL IN INFO YOU NEED HERE
 async function getData(req, res, next) {
+  //if they pass in a zip code we'll use that.
+  if (req.body.zip) {
+    return await getRestaurantsByZip(req)
+  }
+  else {
+    return await getRestaurantsByCoords(req)
+  }
+  
+};
+
+async function getRestaurantsByZip(req) {
+  let zip = req.body.zip;
+  let params = {}
+  if (req.body.size) {
+    params.size = req.body.size
+  }
+  return await Documenu.Restaurants.getByZipCode(zip, params)
+  .then((response) => {
+    if (!response.data || response.data.length == 0) {
+      throw new Error("No restaurants found with the provided query.");
+    } else {
+      return response.data;
+    }
+  })
+  .catch((err) => {
+    console.log("Unsuccessful response: ", err);
+    // return res.status(500).json({
+    //   message: "Unsuccessful response",
+    //   error: err
+    // });
+    throw new Error(err.message);
+  });
+}
+
+async function getRestaurantsByCoords(req) {
   let lat = req.body.lat;
   let lon = req.body.lon;
+  
+  
+  if (!req.body.lat || !req.body.lon) {
+    throw new Error("Improperly defined query. Failed to retrieve data.");
+  }
+  
   let radius;
   if (!req.body.radius) {
     radius = 5;
   } else {
     radius = req.body.radius;
   }
-  if (!req.body.lat || !req.body.lon) {
-    throw new Error("Improperly defined query. Failed to retrieve data.");
+  let size
+  if (req.body.size) {
+    size = req.body.size
   }
-
   const params = {
     lat: lat,
     lon: lon,
     distance: radius,
+    size: size
   };
 
   return await Documenu.Restaurants.searchGeo(params)
@@ -131,4 +166,4 @@ async function getData(req, res, next) {
       // });
       throw new Error(err.message);
     });
-};
+}

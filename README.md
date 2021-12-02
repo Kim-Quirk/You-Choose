@@ -13,7 +13,9 @@ Each request should include a body and headers.For requests that require the use
 ## **FOR STUFF THAT HANDLES SESSIONS:**
 
 ### CREATE A NEW SESSION:
-
+Send either lat/lon or zip. If both are sent, zip will be used.
+Radius: how many miles away the restaurant can be (only works with lat/lon, not with zip)
+size: how many results to get.
 Example Rquest:
 
 ```javascript
@@ -22,7 +24,9 @@ fetch('https://you-choose-api.herokuapp.com/createSession', {
     body: {
 	"lat": "43.8231",
 	"lon": "-111.7924",
-	"radius": "5"
+	"radius": "5", (optional)
+    "size": "10", (optional)
+    "zip": "83440" 
     }
     headers: {
         'Content-Type': 'application/json',
