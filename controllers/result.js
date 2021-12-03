@@ -46,7 +46,7 @@ exports.postSave = (req, res, next) => {
                 }
                 return res.status(200).json({
                     message: "Results saved",
-                    results: result
+                    results: results
                 });
             }
         })

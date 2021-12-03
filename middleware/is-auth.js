@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 const errormsg = require('../error');
 
-const errors = [];
-
 module.exports = (req, res, next) => {
+    const errors = [];
     const authHeader = req.get('Authorization');
     if (!authHeader) {
         errors.push('Not authenticated. You do not have permission.')
