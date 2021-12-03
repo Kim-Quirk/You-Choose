@@ -5,6 +5,9 @@ const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const errormsg = require('../error');
+const errors = [];
+
 const mongoose = require('mongoose');
 
 const User = require("../models/user");
@@ -29,11 +32,12 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        const error = new Error('A user with this email could not be found.');
+        errors.push('A user with this email could not be found.');
+        err = errormsg(errors);
         // error.statusCode = 401;
         return res.status(401).json({
-          message: "Error",
-          error: error.message
+          message: "One or more errors occured.",
+          error: err
         });
       }
       loadedUser = user;
@@ -41,11 +45,12 @@ exports.postLogin = (req, res, next) => {
     })
     .then(isEqual => {
       if (!isEqual) {
-        const error = new Error('Wrong password!');
+        errors.push('Wrong password!');
+        err = errormsg(errors);
         // error.statusCode = 401;
         return res.status(401).json({
-          message: "Error",
-          error: error
+          message: "One or more errors occured.",
+          error: err
         });
       }
       const token = jwt.sign(
@@ -82,7 +87,7 @@ exports.postSignup = (req, res, next) => {
     // error.statusCode = 422;
     error.data = errors.array();
     return res.status(422).json({
-      message: "Error",
+      message: "One or more errors occured.",
       error: errors.errors
     });
   }

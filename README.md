@@ -1,7 +1,5 @@
 # YOU-CHOOSE: Restaurant Chooser API
 
----
-
 ## FOR THE FRONTEND: GET STARTED
 
 ### A note on POST requests:
@@ -34,7 +32,204 @@ fetch('https://you-choose-api.herokuapp.com/createSession', {
 Example Response:
 
 ```javascript
+{
+    "message": "Session created",
+    "roomId": 100102,
+    "roomInfo": {
+        "idCode": 100102,
+        "allRestaurants": [
+            {
+                "restaurant_name": "Gator Jack's Sandwich Shack",
+                "restaurant_id": 43821949111788744,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32c9c"
+            },
+            {
+                "restaurant_name": "Taco Time",
+                "restaurant_id": 43820337111789550,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32c9d"
+            },
+            {
+                "restaurant_name": "Ying Yang Oriental Kitchen",
+                "restaurant_id": 43825192111788220,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32c9e"
+            },
+            {
+                "restaurant_name": "Pizza Hut",
+                "restaurant_id": 43826070111788500,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32c9f"
+            },
+            {
+                "restaurant_name": "Domino's Pizza",
+                "restaurant_id": 43826000111788000,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca0"
+            },
+            {
+                "restaurant_name": "Jamba Juice",
+                "restaurant_id": 43826064111787810,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca1"
+            },
+            {
+                "restaurant_name": "Da Pineapple Grill",
+                "restaurant_id": 43818044111789510,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca2"
+            },
+            {
+                "restaurant_name": "Subway",
+                "restaurant_id": 43818000111788800,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca3"
+            },
+            {
+                "restaurant_name": "Taco Bell",
+                "restaurant_id": 43826078111784456,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca4"
+            },
+            {
+                "restaurant_name": "Taco Bell",
+                "restaurant_id": 43826400111784500,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca5"
+            },
+            {
+                "restaurant_name": "Gringo's Mexican Restaurant",
+                "restaurant_id": 43825131111783530,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca6"
+            },
+            {
+                "restaurant_name": "Sammys",
+                "restaurant_id": 43824790111782560,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca7"
+            },
+            {
+                "restaurant_name": "Papa Murphy's Take 'N' Bake Pizza",
+                "restaurant_id": 43827700111777700,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca8"
+            },
+            {
+                "restaurant_name": "Arctic Circle",
+                "restaurant_id": 43830661111777784,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32ca9"
+            },
+            {
+                "restaurant_name": "Sonic Drive-In",
+                "restaurant_id": 43830642111777496,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32caa"
+            },
+            {
+                "restaurant_name": "Heart Mind & Soul",
+                "restaurant_id": 43812107111804030,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cab"
+            },
+            {
+                "restaurant_name": "Subway",
+                "restaurant_id": 43832700111778500,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cac"
+            },
+            {
+                "restaurant_name": "McDonald's",
+                "restaurant_id": 43833303111778830,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cad"
+            },
+            {
+                "restaurant_name": "Dairy Queen",
+                "restaurant_id": 43833069111778080,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cae"
+            },
+            {
+                "restaurant_name": "Royal Soda",
+                "restaurant_id": 43833992111776610,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32caf"
+            },
+            {
+                "restaurant_name": "KFC - Kentucky Fried Chicken",
+                "restaurant_id": 43834938111777890,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cb0"
+            },
+            {
+                "restaurant_name": "Jack in the Box",
+                "restaurant_id": 43835073111778080,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cb1"
+            },
+            {
+                "restaurant_name": "WINGERS Restaurant",
+                "restaurant_id": 43836200111779800,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cb2"
+            },
+            {
+                "restaurant_name": "Quiznos Sub",
+                "restaurant_id": 43835474111778080,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cb3"
+            },
+            {
+                "restaurant_name": "Subway",
+                "restaurant_id": 43836190111778080,
+                "vote": 0,
+                "voteCount": 0,
+                "_id": "61aa6c12473c136b56a32cb4"
+            }
+        ],
+        "_id": "61aa6c12473c136b56a32c9b"
+    }
+}
+```
 
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": "No response from API"
+}
+
+{
+    "message": "One or more errors occured.",
+    "error": "No restaurants found with the provided query."
+}
 ```
 
 ### CHECK IF A ROOM EXISTS
@@ -52,62 +247,9 @@ Example Response:
 }
 ```
 
-### GET A LIST OF NEARBY RESTAURANTS
-
-Example Request:
-
-```javascript
-fetch(
-  "https://you-choose-api.herokuapp.com/getRestaurantData?lat={latitude}?long={longitude}?radius={radius}?priceRange={priceRange}"
-);
-```
-
-Note the query parameters. Latitude and longitude are required, the default search radius is 5 miles. If you don't specify a price range, all will be included
-
-latitude: number
-
-longitude: number
-
-radius: number of miles
-
-priceRange: 1, 2, or 3, with 3 being the most expensive.
-
-We will return a list of 30 restaurants
-
-Example response:
-
-```javascript
-{
-message: "Retrevial successful",
-data:[
-0:{
-"restaurant_name":"Bareburger - Cobble Hill"
-"restaurant_phone":"(347) 529-6673"
-"restaurant_website":""
-"hours":"Sun-Wed: 11am-10pm Thu-Sat: 11am-11pm"
-"price_range":"$$"
-"price_range_num":2
-"restaurant_id":4068919073992378
-"cuisines":[...]4 items
-"address":{...}5 items
-"geo":{...}2 items
-"menus":[]0 items
-"last_updated":"2021-01-05T07:35:38.231Z"
-}
-1:{...}
-2:{...}
-3:{...}
-4:{...}
-5:{...}
-6:{...}
-7:{...}
-]
-}
-```
-
 ---
 
-## **FOR STUFF THAT HANDLES RESULT SETS:**
+## **FOR STUFF THAT HANDLES RESULT SETS**
 
 ### SAVE A RESULT SET
 
@@ -138,6 +280,25 @@ Example Response:
     ]
 }
 ```
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": [
+        "Failed to confirm token",
+        "JsonWebTokenError: jwt malformed",
+        "No results provided",
+        "No userID provided from decoded token",
+        "User not found by provided token."
+    ]
+}
+
+{
+    "message": "Some other error occured",
+    "error": [Some message here]
+}
+
+```
 
 ### DELETE A RESULT SET
 
@@ -161,6 +322,23 @@ Example Response:
 ```javascript
 {
     "message": "Successfully deleted!"
+}
+```
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": [
+        "Failed to confirm token",
+        "JsonWebTokenError: jwt malformed",
+        "The result ID was not found",
+        "User not found by provided token."
+    ]
+}
+
+{
+    "message": "Some other error occured",
+    "error": [Some message here]
 }
 ```
 
@@ -196,6 +374,23 @@ Example Response:
     ]
 }
 ```
+
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": [
+        "Failed to confirm token",
+        "JsonWebTokenError: jwt malformed",
+        "User not found by provided token. No results found."
+    ]
+}
+
+{
+    "message": "Some other error occured",
+    "error": [Some message here]
+}
+```
 ---
 
 ## **FOR STUFF THAT HANDLES LOGIN AND AUTHENTICATION:**
@@ -226,7 +421,16 @@ Example Response:
         "userId": "6182f30b79728fedec8d0666"
     }
 ```
-
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": [
+        "Wrong password!",
+        "A user with this email could not be found.",
+    ]
+}
+```
 ### SIGN A NEW USER UP
 
 Example Request:
@@ -245,6 +449,27 @@ fetch('https://you-choose-api.herokuapp.com/signup', {
         'Content-Type': 'application/json'
     }
 })
+```
+
+All Possible Error Responses:
+```javascript
+{
+    "message": "One or more errors occured.",
+    "error": [
+        {
+            "value": "test0test.com",
+            "msg": "Please enter a valid email.",
+            "param": "email",
+            "location": "body"
+        },
+        {
+            "value": "pasword",
+            "msg": "Passwords have to match!",
+            "param": "confirmPassword",
+            "location": "body"
+        }
+    ]
+}
 ```
 
 Email must be a valid email.

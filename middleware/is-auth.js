@@ -1,33 +1,40 @@
 const jwt = require('jsonwebtoken');
+const errormsg = require('../error');
+
+const errors = [];
 
 module.exports = (req, res, next) => {
     const authHeader = req.get('Authorization');
     if (!authHeader) {
-        const error = new Error('Not authenticated');
+        errors.push('Not authenticated. You do not have permission.')
+        err = errormsg(errors);
         return res.status(401).json({
-            message: "You do not have permission",
-            error: error.message
+            message: "One or more errors occured.",
+            error: err
         });
-        // error.StatusCode = 401;
-        // throw error;
     }
     let decodedToken;
     try {
         decodedToken = jwt.verify(authHeader, process.env.SECRET);
     } catch (err) {
-        const error = new Error(err);
+        errors.push("Failed to confirm token");
+        errors.push(err);
+        console.log(errors);
+        err = errormsg(errors);
         return res.status(500).json({
-            message: "Failed to confirm token",
-            error: error.message
+            message: "One or more errors occured.",
+            error: err
         });
         // err.statusCode = 500;
         // throw err;
     }
     if (!decodedToken) {
-        const error = new Error('Not authenticated');
+        errors.push("Failed to confirm token");
+        errors.push('Not authenticated');
+        err = errormsg(errors);
         return res.status(401).json({
-            message: "You do not have permission",
-            error: error.message
+            message: "One or more errors occured.",
+            error: err
         });
         // error.statusCode = 401;
         // throw error;

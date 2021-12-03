@@ -61,16 +61,15 @@ exports.createSession = (req, res, next) => {
           roomInfo: currentRoom
 
         })
-        .catch((err) => {
-          res.status(500).json({
-            Message: 'An error ocurred',
-            error: err.message
-          });
-          // console.log(err)
-        });
       }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'One or more errors occured.',
+        error: err.message
+      });
+      // console.log(err)
     });
-  
 }
 
 //check if a room someone is trying to join is set up

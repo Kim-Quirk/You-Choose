@@ -23,7 +23,7 @@ exports.postSave = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
-                errors.push("No userID provided from decoded token");
+                errors.push("User not found by provided token.");
                 console.log(errors);
             } else {
                 let now = new Date();
@@ -53,7 +53,7 @@ exports.postSave = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "This user does not exist",
+                message: "Some other error occured",
                 error: error.message
             });
         });
@@ -71,7 +71,7 @@ exports.postDelete = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
-                errors.push("User not found by decoded token.");
+                errors.push("User not found by provided token.");
             } else {
                 result = user.removeFromResults(resultId)
                 console.log(result)
@@ -94,7 +94,7 @@ exports.postDelete = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "This user does not exist. No results found.",
+                message: "Some other error occured",
                 error: error.message
             });
         });
@@ -112,7 +112,7 @@ exports.getResults = (req, res, next) => {
         })
         .then(user => {
             if (!user) {
-                errors.push("This user does not exist. No results found.");
+                errors.push("User not found by provided token. No results found.");
             } else {
                 const results = user.savedResults.results;
                 return res.status(200).json({
@@ -131,7 +131,7 @@ exports.getResults = (req, res, next) => {
         .catch(err => {
             const error = new Error(err);
             res.status(500).json({
-                message: "This user does not exist",
+                message: "Some other error occured",
                 error: error.message
             });
         });
