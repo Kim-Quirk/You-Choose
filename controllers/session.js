@@ -3,6 +3,7 @@ const RoomId = require("../models/roomId");
 const session = require("../socket");
 const testData = require("../data/sampleData");
 const Documenu = require('documenu');
+const errormsg = require('../error');
 Documenu.configure(process.env.API_KEY);
 const {
   check,
@@ -35,7 +36,13 @@ exports.createSession = (req, res, next) => {
       //here is the spot to get the data:
       let restaurantData = await getData(req, res, next)
 
-      const currentRoom = new RoomId({
+      if (!restaurantData || !Array.isArray(restaurantData)) {
+        return res.status(500).json({
+          message: `No response from API`
+        });
+      } else {
+        // console.log(restaurantData);
+        const currentRoom = new RoomId({
         idCode: roomId,
         allRestaurants: restaurantData.map((restaurant) => ({
           ...restaurant,
@@ -54,13 +61,14 @@ exports.createSession = (req, res, next) => {
           roomInfo: currentRoom
 
         })
-        .catch((err) => {
-          res.status(500).json({
-            Message: 'An error ocurred',
-            error: err.message
-          });
-          console.log(err)
-        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: 'One or more errors occured.',
+        error: err.message
+      });
+      // console.log(err)
     });
 }
 
@@ -117,18 +125,18 @@ async function getData(req, res, next) {
 
   return await Documenu.Restaurants.searchGeo(params)
     .then((response) => {
-      if (!response.data || response.data.length == 0) {
-        throw new Error("No restaurants found with the provided query.");
+      if (!response) {
+        throw new Error("No response from API");
       } else {
-        return response.data;
+        if (!response.data || response.data.length == 0) {
+          throw new Error("No restaurants found with the provided query.");
+        } else {
+          return response.data;
+        }
       }
     })
     .catch((err) => {
-      console.log("Unsuccessful response: ", err);
-      // return res.status(500).json({
-      //   message: "Unsuccessful response",
-      //   error: err
-      // });
-      throw new Error(err.message);
+      // console.log("Unsuccessful response: ", err);
+      return err
     });
 };
