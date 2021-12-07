@@ -600,7 +600,6 @@ Email must be a valid email.
 
 Password Requirements:
 * Minimum of 5 characters
-* Is alphanumeric (no special characters)
 
 Example Responses:
 
