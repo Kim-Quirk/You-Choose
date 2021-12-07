@@ -6,7 +6,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const errormsg = require('../error');
-const errors = [];
 
 const mongoose = require('mongoose');
 
@@ -24,6 +23,7 @@ const transporter = nodemailer.createTransport(
 // Takes in an email and password
 // Returns a success or specific error message
 exports.postLogin = (req, res, next) => {
+  const error = [];
   const email = req.body.email;
   const password = req.body.password;
   //one week
@@ -32,8 +32,8 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: email })
     .then(user => {
       if (!user) {
-        errors.push('A user with this email could not be found.');
-        err = errormsg(errors);
+        error.push('A user with this email could not be found.');
+        err = errormsg(error);
         // error.statusCode = 401;
         return res.status(401).json({
           message: "One or more errors occured.",
@@ -45,8 +45,8 @@ exports.postLogin = (req, res, next) => {
     })
     .then(isEqual => {
       if (!isEqual) {
-        errors.push('Wrong password!');
-        err = errormsg(errors);
+        error.push('Wrong password!');
+        err = errormsg(error);
         // error.statusCode = 401;
         return res.status(401).json({
           message: "One or more errors occured.",
@@ -78,6 +78,7 @@ exports.postLogin = (req, res, next) => {
 // Takes in an email and password
 // Returns a success message and the user ID
 exports.postSignup = (req, res, next) => {
+  const error = [];
   const email = req.body.email;
   const password = req.body.password;
   const errors = validationResult(req);
