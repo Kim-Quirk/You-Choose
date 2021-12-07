@@ -33,189 +33,308 @@ Example Response:
 
 ```javascript
 {
-    "message": "Session created",
-    "roomId": 100102,
-    "roomInfo": {
-        "idCode": 100102,
-        "allRestaurants": [
-            {
-                "restaurant_name": "Gator Jack's Sandwich Shack",
-                "restaurant_id": 43821949111788744,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32c9c"
-            },
-            {
-                "restaurant_name": "Taco Time",
-                "restaurant_id": 43820337111789550,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32c9d"
-            },
-            {
-                "restaurant_name": "Ying Yang Oriental Kitchen",
-                "restaurant_id": 43825192111788220,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32c9e"
-            },
-            {
-                "restaurant_name": "Pizza Hut",
-                "restaurant_id": 43826070111788500,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32c9f"
-            },
-            {
-                "restaurant_name": "Domino's Pizza",
-                "restaurant_id": 43826000111788000,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca0"
-            },
-            {
-                "restaurant_name": "Jamba Juice",
-                "restaurant_id": 43826064111787810,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca1"
-            },
-            {
-                "restaurant_name": "Da Pineapple Grill",
-                "restaurant_id": 43818044111789510,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca2"
-            },
-            {
-                "restaurant_name": "Subway",
-                "restaurant_id": 43818000111788800,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca3"
-            },
-            {
-                "restaurant_name": "Taco Bell",
-                "restaurant_id": 43826078111784456,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca4"
-            },
-            {
-                "restaurant_name": "Taco Bell",
-                "restaurant_id": 43826400111784500,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca5"
-            },
-            {
-                "restaurant_name": "Gringo's Mexican Restaurant",
-                "restaurant_id": 43825131111783530,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca6"
-            },
-            {
-                "restaurant_name": "Sammys",
-                "restaurant_id": 43824790111782560,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca7"
-            },
-            {
-                "restaurant_name": "Papa Murphy's Take 'N' Bake Pizza",
-                "restaurant_id": 43827700111777700,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca8"
-            },
-            {
-                "restaurant_name": "Arctic Circle",
-                "restaurant_id": 43830661111777784,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32ca9"
-            },
-            {
-                "restaurant_name": "Sonic Drive-In",
-                "restaurant_id": 43830642111777496,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32caa"
-            },
-            {
-                "restaurant_name": "Heart Mind & Soul",
-                "restaurant_id": 43812107111804030,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cab"
-            },
-            {
-                "restaurant_name": "Subway",
-                "restaurant_id": 43832700111778500,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cac"
-            },
-            {
-                "restaurant_name": "McDonald's",
-                "restaurant_id": 43833303111778830,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cad"
-            },
-            {
-                "restaurant_name": "Dairy Queen",
-                "restaurant_id": 43833069111778080,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cae"
-            },
-            {
-                "restaurant_name": "Royal Soda",
-                "restaurant_id": 43833992111776610,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32caf"
-            },
-            {
-                "restaurant_name": "KFC - Kentucky Fried Chicken",
-                "restaurant_id": 43834938111777890,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cb0"
-            },
-            {
-                "restaurant_name": "Jack in the Box",
-                "restaurant_id": 43835073111778080,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cb1"
-            },
-            {
-                "restaurant_name": "WINGERS Restaurant",
-                "restaurant_id": 43836200111779800,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cb2"
-            },
-            {
-                "restaurant_name": "Quiznos Sub",
-                "restaurant_id": 43835474111778080,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cb3"
-            },
-            {
-                "restaurant_name": "Subway",
-                "restaurant_id": 43836190111778080,
-                "vote": 0,
-                "voteCount": 0,
-                "_id": "61aa6c12473c136b56a32cb4"
-            }
-        ],
-        "_id": "61aa6c12473c136b56a32c9b"
-    }
+	"message": "Session created",
+	"roomId": 100128,
+	"roomInfo": {
+		"idCode": 100128,
+		"allRestaurants": [
+			{
+				"restaurant_name": "Gator Jack's Sandwich Shack",
+				"restaurant_id": 43821949111788744,
+				"price_range": "$",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad74"
+			},
+			{
+				"restaurant_name": "Taco Time",
+				"restaurant_id": 43820337111789550,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Mexican",
+					"Tex-Mex"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad75"
+			},
+			{
+				"restaurant_name": "Ying Yang Oriental Kitchen",
+				"restaurant_id": 43825192111788220,
+				"price_range": "$$",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad76"
+			},
+			{
+				"restaurant_name": "Pizza Hut",
+				"restaurant_id": 43826070111788500,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Pizza"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad77"
+			},
+			{
+				"restaurant_name": "Domino's Pizza",
+				"restaurant_id": 43826000111788000,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Pizza",
+					"Wings"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad78"
+			},
+			{
+				"restaurant_name": "Jamba Juice",
+				"restaurant_id": 43826064111787810,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Smoothies & Juices"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad79"
+			},
+			{
+				"restaurant_name": "Da Pineapple Grill",
+				"restaurant_id": 43818044111789510,
+				"price_range": "$$",
+				"cuisines": [
+					"American",
+					"Hawaiian"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7a"
+			},
+			{
+				"restaurant_name": "Subway",
+				"restaurant_id": 43818000111788800,
+				"price_range": "",
+				"cuisines": [
+					"Sandwiches"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7b"
+			},
+			{
+				"restaurant_name": "Taco Bell",
+				"restaurant_id": 43826078111784456,
+				"price_range": "",
+				"cuisines": [
+					"Mexican"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7c"
+			},
+			{
+				"restaurant_name": "Taco Bell",
+				"restaurant_id": 43826400111784500,
+				"price_range": "",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7d"
+			},
+			{
+				"restaurant_name": "Gringo's Mexican Restaurant",
+				"restaurant_id": 43825131111783530,
+				"price_range": "$$",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7e"
+			},
+			{
+				"restaurant_name": "Sammys",
+				"restaurant_id": 43824790111782560,
+				"price_range": "$",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad7f"
+			},
+			{
+				"restaurant_name": "Papa Murphy's Take 'N' Bake Pizza",
+				"restaurant_id": 43827700111777700,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Pizza",
+					"Salads"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad80"
+			},
+			{
+				"restaurant_name": "Arctic Circle",
+				"restaurant_id": 43830661111777784,
+				"price_range": "$$",
+				"cuisines": [
+					"American",
+					"Burgers",
+					"Ice Cream"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad81"
+			},
+			{
+				"restaurant_name": "Sonic Drive-In",
+				"restaurant_id": 43830642111777496,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Burgers"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad82"
+			},
+			{
+				"restaurant_name": "Heart Mind & Soul",
+				"restaurant_id": 43812107111804030,
+				"price_range": "",
+				"cuisines": [
+					"American"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad83"
+			},
+			{
+				"restaurant_name": "Subway",
+				"restaurant_id": 43832700111778500,
+				"price_range": "",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad84"
+			},
+			{
+				"restaurant_name": "McDonald's",
+				"restaurant_id": 43833303111778830,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Burgers"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad85"
+			},
+			{
+				"restaurant_name": "Dairy Queen",
+				"restaurant_id": 43833069111778080,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Burgers",
+					"Ice Cream"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad86"
+			},
+			{
+				"restaurant_name": "Royal Soda",
+				"restaurant_id": 43833992111776610,
+				"price_range": "",
+				"cuisines": [
+					""
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad87"
+			},
+			{
+				"restaurant_name": "KFC - Kentucky Fried Chicken",
+				"restaurant_id": 43834938111777890,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Chicken"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad88"
+			},
+			{
+				"restaurant_name": "Jack in the Box",
+				"restaurant_id": 43835073111778080,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Burgers"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad89"
+			},
+			{
+				"restaurant_name": "WINGERS Restaurant",
+				"restaurant_id": 43836200111779800,
+				"price_range": "$",
+				"cuisines": [
+					"American"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad8a"
+			},
+			{
+				"restaurant_name": "Quiznos Sub",
+				"restaurant_id": 43835474111778080,
+				"price_range": "",
+				"cuisines": [
+					"American",
+					"Sandwiches",
+					"Wraps"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad8b"
+			},
+			{
+				"restaurant_name": "Subway",
+				"restaurant_id": 43836190111778080,
+				"price_range": "",
+				"cuisines": [
+					"Sandwiches"
+				],
+				"vote": 0,
+				"voteCount": 0,
+				"_id": "61af9d0e4edf69acd672ad8c"
+			}
+		],
+		"_id": "61af9d0e4edf69acd672ad73"
+	}
 }
 ```
 
