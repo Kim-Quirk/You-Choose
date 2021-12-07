@@ -228,6 +228,11 @@ All Possible Error Responses:
 
 {
     "message": "One or more errors occured.",
+    "error": "Radius cannot be a negative value or zero."
+}
+
+{
+    "message": "One or more errors occured.",
     "error": "No restaurants found with the provided query."
 }
 ```
