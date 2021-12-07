@@ -116,11 +116,14 @@ async function getData(req, res, next) {
   if (!req.body.lat || !req.body.lon) {
     throw new Error("Improperly defined query. Failed to retrieve data.");
   }
+  if (Math.sign(radius) !== 1) {
+    throw new Error("Radius cannot be a negative value or zero.");
+  }
 
   const params = {
     lat: lat,
     lon: lon,
-    distance: radius,
+    distance: Math.round(radius),
   };
 
   return await Documenu.Restaurants.searchGeo(params)
