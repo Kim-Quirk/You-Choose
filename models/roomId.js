@@ -19,6 +19,12 @@ const RoomId = new Schema({
       restaurant_id: {
         type: Number
       },
+      price_range: {
+        type: String
+      },
+      cuisines: {
+        type: Array
+      },
       vote: {
         type: Number
       },
