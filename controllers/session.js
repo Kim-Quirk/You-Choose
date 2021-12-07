@@ -41,18 +41,17 @@ exports.createSession = (req, res, next) => {
           message: `No response from API`
         });
       } else {
-        // console.log(restaurantData);
         const currentRoom = new RoomId({
         idCode: roomId,
-        allRestaurants: restaurantData.map((restaurant) => ({
-          ...restaurant,
-          // score of the vote
-          vote: 0,
-          // num of people who have voted
-          voteCount: 0
-        }))
+          allRestaurants: restaurantData.map((restaurant) => {
+            restaurant.vote = 0
+            restaurant.voteCount = 0
+          return restaurant
+          })
 
-      });
+        });
+        console.log(currentRoom.allRestaurants)
+        
       currentRoom.save();
 
       return res.status(200).json({
