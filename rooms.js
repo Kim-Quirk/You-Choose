@@ -49,8 +49,8 @@ exports.allowSocketConnection = (server) => {
 					nextRestaurant(
 						room.allRestaurants,
 						restaurantIndex,
-                        roomId,
-                        true
+						roomId,
+						true
 					);
 				}
 			});
@@ -62,24 +62,30 @@ exports.allowSocketConnection = (server) => {
 	});
 
 	//prepares and emits next restaurant
-    function nextRestaurant(allRestaurants, currentIndex, roomId, stop = true) {
-        //clears timer for previous session
-        if (stop) {
-            for (var i=0; i<timeouts.length; i++) {
+	function nextRestaurant(allRestaurants, currentIndex, roomId, stop = true) {
+		//clears timer for previous session
+        for (var i = 0; i < timeouts.length; i++) {
+            if (timeouts[i].roomId == roomId) {
                 clearTimeout(timeouts[i]);
-              }
-        }
-        timeouts.push(setTimeout(() => {
-            nextRestaurant(allRestaurants, currentIndex + 1, roomId);
-        }, 10000));
+            }
+		}
+
+        timeouts.push({
+            timeout: setTimeout(() => {
+                nextRestaurant(allRestaurants, currentIndex + 1, roomId);
+            }, 10000),
+            roomId: roomId
+		});
         
 		//if we've reached the end of all the restaurants
 		if (currentIndex === allRestaurants.length - 1) {
 			return pickBestRestaurant(allRestaurants, roomId);
 		}
-		io.sockets
-			.in(roomId)
-			.emit('nextRestaurant', allRestaurants[currentIndex + 1]);
+		if (currentIndex < allRestaurants.length) {
+			io.sockets
+				.in(roomId)
+				.emit('nextRestaurant', allRestaurants[currentIndex + 1]);
+		}
 	}
 
 	// sets up potential socket connections
@@ -185,6 +191,5 @@ exports.allowSocketConnection = (server) => {
 			restaurants[2].restaurant_name,
 		];
 		io.to(roomId).emit('finish', top3);
-
 	}
 };
