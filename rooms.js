@@ -66,7 +66,7 @@ exports.allowSocketConnection = (server) => {
 		//clears timer for previous session
         for (var i = 0; i < timeouts.length; i++) {
             if (timeouts[i].roomId == roomId) {
-                clearTimeout(timeouts[i]);
+                clearTimeout(timeouts[i].timeout);
             }
 		}
 
