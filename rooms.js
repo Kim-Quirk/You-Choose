@@ -63,7 +63,7 @@ exports.allowSocketConnection = (server) => {
 
 	//prepares and emits next restaurant
     function nextRestaurant(allRestaurants, currentIndex, roomId, stop = true) {
-        
+        //clears timer for previous session
         if (stop) {
             for (var i=0; i<timeouts.length; i++) {
                 clearTimeout(timeouts[i]);
@@ -186,16 +186,5 @@ exports.allowSocketConnection = (server) => {
 		];
 		io.to(roomId).emit('finish', top3);
 
-		//clean up rooms
-		// RoomId.deleteOne({ idCode: roomId }).then(result => {
-		//     console.log(result)
-		// }).catch(err => {
-		//     if (err instanceof VersionError) {
-		//         return console.log(err)
-		//     }
-		//     else {
-		//         console.log(err)
-		//     }
-		// })
 	}
 };
